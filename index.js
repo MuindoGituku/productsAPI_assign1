@@ -45,8 +45,9 @@ app.post('/products', (req, res) => {
     console.log('products POST: sending response');
 });
 
-// Delete product
+// Delete all products
 app.delete('/products', (req, res) => {
+    console.log('products DELETE: received request');
     products = [];
     deletes++;
     console.log('Processed Request Count---> GET: '+gets+' POSTS: '+posts+' DELETES: '+deletes);
