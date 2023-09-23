@@ -27,6 +27,21 @@ app.get('/products', (req, res) => {
     console.log('products GET: sending response');
 });
 
+// Get product
+app.get('/products/:productId', (req, res) => {
+    gets++;
+
+    console.log('products GET: received request');
+
+    const productId = req.params.productId;
+    const product = products.find(p => p.productId === productId);
+
+    res.json(product);
+
+    console.log('Processed Request Count---> GET: '+gets+' POSTS: '+posts+' DELETES: '+deletes);
+    console.log('products GET: sending response');
+});
+
 // Add product
 app.post('/products', (req, res) => {
     console.log('products POST: received request');
@@ -55,6 +70,21 @@ app.delete('/products', (req, res) => {
     console.log('products DELETE: sending response');
 });
 
+// Delete product
+app.delete('/products/:productId', (req, res) => {
+    console.log('products DELETE: received request');
+
+    const productId = req.params.productId;
+    const index = products.findIndex(p => p.productId === productId);
+
+    products.splice(index, 1);
+
+    deletes++;
+    console.log('Processed Request Count---> GET: '+gets+' POSTS: '+posts+' DELETES: '+deletes);
+    res.json(products);
+    console.log('products DELETE: sending response');
+});
+
 
 // Start server and log message
 app.listen(port, () => {
@@ -62,6 +92,7 @@ app.listen(port, () => {
 
     console.log('====================ENDPOINTS====================');
     console.log('/products');
+    console.log('/products/:productId');
 
     console.log('====================ALLOWED METHODS====================');
     console.log('GET, POST, DELETE');
